@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Compra Certa</string>
+    <string name="btCadastrar">Cadastrar</string>
+    <string name="btEntrar">Entrar</string>
+</resources>
