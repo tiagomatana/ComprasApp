@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Conexao extends SQLiteOpenHelper {
 
-    private static final String name = "edina.db";
+    private static final String name = "database.db";
     private static final int version = 2;
 
     public Conexao(Context context){
@@ -16,7 +16,7 @@ public class Conexao extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table usuario(id integer primary key autoincrement, email varchar(50) not null, " +
+        db.execSQL("create table usuarios(id integer primary key autoincrement, email varchar(50) unique not null, " +
                 "name varchar(50) not null unique, password varchar(50) not null)");
     }
 

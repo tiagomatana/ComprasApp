@@ -26,13 +26,14 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Listas");
-        listView = findViewById(R.id.listagem);
-        dao = new UserDAO(this);
-        usuarios = dao.load();
-        usuariosFiltrados.addAll(usuarios);
-        ArrayAdapter<User> adapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, usuarios);
-        listView.setAdapter(adapter);
+        User logado = (User) getIntent().getSerializableExtra("USUARIO");
+        getSupportActionBar().setTitle(logado.getNome() + " - Lista");
+//        listView = findViewById(R.id.listagem);
+//        dao = new UserDAO(this);
+//        usuarios = dao.load();
+//        usuariosFiltrados.addAll(usuarios);
+//        ArrayAdapter<User> adapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, usuarios);
+//        listView.setAdapter(adapter);
 
 
     }

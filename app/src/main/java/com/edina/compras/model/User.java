@@ -35,14 +35,21 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return nome;
-    }
+//    @Override
+//    public String toString() {
+//        return nome;
+//    }
 
     private int id;
     private String nome;
     private String email;
     private String password;
 
+    public boolean validate() {
+        return !nome.isEmpty() && !email.isEmpty() && !password.isEmpty();
+    }
+
+    public boolean isLogged() {
+        return !nome.isEmpty() && !email.isEmpty() && id > 0;
+    }
 }

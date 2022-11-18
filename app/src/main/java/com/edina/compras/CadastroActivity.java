@@ -26,6 +26,7 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Cadastro");
         dao = new UserDAO(this);
 
         nome = findViewById(R.id.campoNome);
@@ -42,16 +43,25 @@ public class CadastroActivity extends AppCompatActivity {
             user.setNome(nome.getText().toString());
             user.setEmail(email.getText().toString());
             user.setPassword(password.getText().toString());
-            insert(user);
+            if (user.validate()) {
+                insert(user);
+            } else {
+                Toast.makeText(this, "Informe todos os campos.", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }
 
     public void insert(User user){
         long id = dao.save(user);
-
-        Toast.makeText(this, "Salvo com sucesso. ID: "+ id, Toast.LENGTH_SHORT).show();
-        clear();
+        if (id > 0){
+            Toast.makeText(this, "Cadastro realizado com sucesso.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, InicioActivity.class);
+            intent.putExtra("USUARIO", user);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Houve um problema. Contate o administrador.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void clear() {

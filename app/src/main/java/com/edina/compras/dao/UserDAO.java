@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.edina.compras.connection.Conexao;
 import com.edina.compras.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDAO {
     private Conexao conexao;
@@ -25,22 +23,21 @@ public class UserDAO {
         values.put("name", user.getNome());
         values.put("email", user.getEmail());
         values.put("password", user.getPassword());
-        return banco.insert("usuario", null, values);
+        return banco.insert("usuarios", null, values);
     }
 
-    public List<User> load() {
-        List<User> users = new ArrayList<>();
-        Cursor cursor = banco.query("usuario", new String[]{"id", "name", "email", "password"},
-                null, null, null, null, null);
-        while (cursor.moveToNext()) {
-            User user = new User();
-            user.setId(cursor.getInt(0));
-            user.setNome(cursor.getString(1));
-            user.setEmail(cursor.getString(2));
-            user.setPassword(cursor.getString(3));
-            users.add(user);
+    public User login(User user) {
+        User logged = new User();
+        String query = "SELECT email,name,id FROM usuarios WHERE email = '" + user.getEmail() + "' and password = '"+ user.getPassword()+"'";
+        Cursor cursor = banco.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            if (user.getEmail().equals(cursor.getString(0))){
+                logged.setEmail(cursor.getString(0));
+                logged.setNome(cursor.getString(1));
+                logged.setId(cursor.getInt(2));
+            }
         }
 
-        return users;
+        return logged;
     }
 }
