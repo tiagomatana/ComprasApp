@@ -1,6 +1,8 @@
 package com.edina.compras.model;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 
     public Item(int id, String descricao, int quantidade, String email, int status) {
         this.id = id;
@@ -36,8 +38,8 @@ public class Item {
         this.quantidade = quantidade;
     }
 
-    public boolean isStatus() {
-        return status == 1 ? Boolean.TRUE : Boolean.FALSE;
+    public boolean getStatus() {
+        return Boolean.parseBoolean(String.valueOf(status == 1 ? Boolean.TRUE : Boolean.FALSE));
     }
 
     public void setStatus(int status) {

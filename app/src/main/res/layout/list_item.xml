@@ -10,8 +10,13 @@
         android:id="@+id/itemDecription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
-        android:layout_margin="16dp"/>
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:checked="true"
+        android:textSize="25dp"
+        android:text="CheckBox" />
 
     <TextView
         android:id="@+id/qntView"

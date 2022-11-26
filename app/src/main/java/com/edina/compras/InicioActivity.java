@@ -1,6 +1,7 @@
 package com.edina.compras;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -40,7 +41,8 @@ public class InicioActivity extends AppCompatActivity {
 
         ItemAdapter adapter = new ItemAdapter(items);
         recyclerView.setAdapter(adapter);
-        items = itemDAO.load(logado);
+        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layout);
 
 
 

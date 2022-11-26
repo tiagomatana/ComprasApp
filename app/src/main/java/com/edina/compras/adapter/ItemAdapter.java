@@ -1,6 +1,5 @@
 package com.edina.compras.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    private Context context;
     private ArrayList<Item> itemsData;
 
     @NonNull
@@ -32,13 +30,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getDescriptionView().setText(itemsData.get(position).getDescricao());
-        holder.getDescriptionView().setChecked(itemsData.get(position).isStatus());
-        holder.getQuantidadeView().setText(itemsData.get(position).getQuantidade());
+        holder.getDescriptionView().setChecked(itemsData.get(position).getStatus());
+        holder.getQuantidadeView().setText(""+ itemsData.get(position).getQuantidade());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemsData.size();
     }
 
     public ItemAdapter(ArrayList<Item> items) {
@@ -50,8 +48,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private final TextView quantidadeView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            descriptionView = (CheckBox) itemView.findViewById(R.id.itemDecription);
-            quantidadeView = (TextView) itemView.findViewById(R.id.qntView);
+            descriptionView = itemView.findViewById(R.id.itemDecription);
+            quantidadeView = itemView.findViewById(R.id.qntView);
 
         }
 
