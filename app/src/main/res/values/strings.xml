@@ -2,4 +2,6 @@
     <string name="app_name">Compra Certa</string>
     <string name="btCadastrar">Cadastrar</string>
     <string name="btEntrar">Entrar</string>
+    <string name="expand_item">Expand Item</string>
+    <string name="list_name">Minha Compras</string>
 </resources>

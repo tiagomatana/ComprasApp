@@ -1,14 +1,16 @@
 package com.edina.compras;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
+import com.edina.compras.adapter.ItemAdapter;
+import com.edina.compras.dao.ItemDAO;
 import com.edina.compras.dao.UserDAO;
+import com.edina.compras.model.Item;
 import com.edina.compras.model.User;
 
 import java.util.ArrayList;
@@ -16,8 +18,9 @@ import java.util.List;
 
 public class InicioActivity extends AppCompatActivity {
 
-    private ListView listView;
-    private UserDAO dao;
+    private RecyclerView recyclerView;
+    private UserDAO userDAO;
+    private ItemDAO itemDAO;
     private List<User> usuarios;
     private List<User> usuariosFiltrados = new ArrayList<>();
 
@@ -27,13 +30,18 @@ public class InicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         User logado = (User) getIntent().getSerializableExtra("USUARIO");
-        getSupportActionBar().setTitle(logado.getNome() + " - Lista");
-//        listView = findViewById(R.id.listagem);
-//        dao = new UserDAO(this);
-//        usuarios = dao.load();
-//        usuariosFiltrados.addAll(usuarios);
-//        ArrayAdapter<User> adapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, usuarios);
-//        listView.setAdapter(adapter);
+        if (!logado.isLogged()) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        getSupportActionBar().setTitle("Bem-vindo " + logado.getNome().toUpperCase());
+        recyclerView = findViewById(R.id.recyclerView);
+        itemDAO = new ItemDAO(this);
+        ArrayList<Item> items = itemDAO.load(logado);
+
+        ItemAdapter adapter = new ItemAdapter(items);
+        recyclerView.setAdapter(adapter);
+        items = itemDAO.load(logado);
+
 
 
     }

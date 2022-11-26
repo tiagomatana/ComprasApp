@@ -36,9 +36,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivity(myIntent);
-//        return true;
-//    }
+
 }

@@ -17,7 +17,10 @@ public class Conexao extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table usuarios(id integer primary key autoincrement, email varchar(50) unique not null, " +
-                "name varchar(50) not null unique, password varchar(50) not null)");
+                "name varchar(50) not null, password varchar(50) not null)");
+        db.execSQL("create table items(id integer primary key autoincrement, email varchar(50) not null, " +
+                "descricao varchar(50) not null, quantidade int not null, status bool not null)");
+//        db.execSQL("insert into items (descricao, quantidade, status, email) values (\"livro\", 4, \"false\", \"tiago.matana@gmail.com\")");
     }
 
     @Override

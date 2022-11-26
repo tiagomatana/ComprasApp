@@ -50,6 +50,6 @@ public class User implements Serializable {
     }
 
     public boolean isLogged() {
-        return !nome.isEmpty() && !email.isEmpty() && id > 0;
+        return !nome.isEmpty() && !email.isEmpty();
     }
 }
