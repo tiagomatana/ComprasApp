@@ -25,9 +25,9 @@ public class ItemDAO {
         ArrayList<Item> items = new ArrayList<>();
 
         ContentValues values = new ContentValues();
-        values.put("descricao", "Livro");
+        values.put("descricao", "Livro Usado teste");
         values.put("email", user.getEmail());
-        values.put("status", Boolean.TRUE);
+        values.put("status", 1);
         values.put("quantidade", 4);
         banco.insert("items", null, values);
         String query = "SELECT * FROM items WHERE email = '" + user.getEmail() + "'";

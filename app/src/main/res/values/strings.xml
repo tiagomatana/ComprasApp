@@ -4,4 +4,6 @@
     <string name="btEntrar">Entrar</string>
     <string name="expand_item">Expand Item</string>
     <string name="list_name">Minha Compras</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

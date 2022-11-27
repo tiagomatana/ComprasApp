@@ -1,12 +1,18 @@
 package com.edina.compras;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.SupportMenuInflater;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.edina.compras.adapter.ItemAdapter;
 import com.edina.compras.dao.ItemDAO;
@@ -20,10 +26,10 @@ import java.util.List;
 public class InicioActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private UserDAO userDAO;
     private ItemDAO itemDAO;
-    private List<User> usuarios;
     private List<User> usuariosFiltrados = new ArrayList<>();
+    private AlertDialog alerta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,22 @@ public class InicioActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
+
+        findViewById(R.id.btAddItem).setOnClickListener(view -> {
+            LayoutInflater li = getLayoutInflater();
+            View v = li.inflate(R.layout.activity_adicionar_item, null);
+            v.findViewById(R.id.btAdicionar).setOnClickListener(viewDialog -> {
+                Toast.makeText(this, "TESTE", Toast.LENGTH_SHORT).show();
+            });
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Adicionar Item");
+            builder.setView(v);
+            alerta = builder.create();
+            alerta.show();
+
+        });
+
+
 
 
 

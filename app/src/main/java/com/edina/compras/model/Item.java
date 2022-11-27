@@ -12,7 +12,10 @@ public class Item implements Serializable {
         this.status = status;
     }
 
-    public Item() {}
+    public Item() {
+        this.quantidade = 0;
+        this.status = 0;
+    }
 
     public int getId() {
         return id;

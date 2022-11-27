@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Conexao extends SQLiteOpenHelper {
 
-    private static final String name = "database.db";
-    private static final int version = 2;
+    private static final String name = "database1.db";
+    private static final int version = 1;
 
     public Conexao(Context context){
         super(context, name, null, version);
