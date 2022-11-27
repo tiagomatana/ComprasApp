@@ -20,13 +20,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdicionarItem"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".InicioActivity"
             android:exported="false">
             <meta-data

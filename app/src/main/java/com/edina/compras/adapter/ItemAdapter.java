@@ -1,15 +1,19 @@
 package com.edina.compras.adapter;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edina.compras.R;
+import com.edina.compras.dao.ItemDAO;
 import com.edina.compras.model.Item;
 
 import java.util.ArrayList;
@@ -17,6 +21,8 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private ArrayList<Item> itemsData;
+    private ItemDAO itemDAO;
+
 
     @NonNull
     @Override
@@ -32,6 +38,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.getDescriptionView().setText(itemsData.get(position).getDescricao());
         holder.getDescriptionView().setChecked(itemsData.get(position).getStatus());
         holder.getQuantidadeView().setText(""+ itemsData.get(position).getQuantidade());
+        holder.getDescriptionView().setOnCheckedChangeListener((compoundButton, b) -> {
+            itemDAO = new ItemDAO(compoundButton.getContext());
+            itemsData.get(position).setStatus(b == Boolean.TRUE ? 1 : 0);
+            itemDAO.update(itemsData.get(position));
+
+        });
+
+        holder.itemView.findViewById(R.id.editButton).setOnClickListener(view -> {
+
+        });
     }
 
     @Override

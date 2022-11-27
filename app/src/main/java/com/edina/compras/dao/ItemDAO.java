@@ -1,5 +1,6 @@
 package com.edina.compras.dao;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -21,20 +22,16 @@ public class ItemDAO {
         banco = conexao.getWritableDatabase();
     }
 
+    @SuppressLint("Range")
     public ArrayList<Item> load(User user) {
         ArrayList<Item> items = new ArrayList<>();
 
-        ContentValues values = new ContentValues();
-        values.put("descricao", "Livro Usado teste");
-        values.put("email", user.getEmail());
-        values.put("status", 1);
-        values.put("quantidade", 4);
-        banco.insert("items", null, values);
         String query = "SELECT * FROM items WHERE email = '" + user.getEmail() + "'";
         Cursor cursor = banco.rawQuery(query, null);
         while (cursor.moveToNext()){
 
             Item item = new Item();
+            item.setId(cursor.getInt(cursor.getColumnIndex("id")));
             item.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
             item.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
             item.setQuantidade(cursor.getInt(cursor.getColumnIndex("quantidade")));
@@ -44,5 +41,22 @@ public class ItemDAO {
         }
 
         return items;
+    }
+
+    public Long save(Item item) {
+        ContentValues values = new ContentValues();
+        values.put("descricao", item.getDescricao());
+        values.put("email", item.getEmail());
+        values.put("status", item.getStatus());
+        values.put("quantidade", item.getQuantidade());
+        return banco.insert("items", null, values);
+    }
+
+    public void update(Item item) {
+        ContentValues values = new ContentValues();
+        values.put("descricao", item.getDescricao());
+        values.put("status", item.getStatus());
+        values.put("quantidade", item.getQuantidade());
+        banco.update("items", values, "id = ?", new String[]{Integer.toString(item.getId())});
     }
 }

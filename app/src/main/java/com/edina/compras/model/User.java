@@ -35,10 +35,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-//    @Override
-//    public String toString() {
-//        return nome;
-//    }
 
     private int id;
     private String nome;
