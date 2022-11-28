@@ -4,17 +4,9 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-    public Item(int id, String descricao, int quantidade, String email, int status) {
-        this.id = id;
-        this.descricao = descricao;
-        this.quantidade = quantidade;
-        this.email = email;
-        this.status = status;
-    }
-
     public Item() {
         this.quantidade = 0;
-        this.status = 0;
+        this.status = false;
     }
 
     public int getId() {
@@ -42,10 +34,10 @@ public class Item implements Serializable {
     }
 
     public boolean getStatus() {
-        return Boolean.parseBoolean(String.valueOf(status == 1 ? Boolean.TRUE : Boolean.FALSE));
+        return this.status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -62,7 +54,7 @@ public class Item implements Serializable {
     private String email;
     private String descricao;
     private int quantidade;
-    private int status;
+    private boolean status;
 
 
 

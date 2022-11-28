@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.edina.compras.dao.UserDAO;
 import com.edina.compras.model.User;
@@ -24,11 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         dao = new UserDAO(this);
-
         email = findViewById(R.id.loginEmail);
         password = findViewById(R.id.loginSenha);
         btLogar = findViewById(R.id.btLogar);
-
         btLogar.setOnClickListener(view -> {
             User login = new User();
             login.setEmail(email.getText().toString());
@@ -38,9 +37,10 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, InicioActivity.class);
                 intent.putExtra("USUARIO", usuario);
                 startActivity(intent);
+            } else {
+                Toast.makeText(this, "Usuário não encontrado.", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

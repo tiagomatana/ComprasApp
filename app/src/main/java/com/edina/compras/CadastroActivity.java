@@ -36,8 +36,6 @@ public class CadastroActivity extends AppCompatActivity {
 
         clear();
 
-
-
         btSalvar.setOnClickListener(view -> {
             User user = new User();
             user.setNome(nome.getText().toString());

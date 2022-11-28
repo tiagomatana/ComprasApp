@@ -29,15 +29,13 @@ public class ItemDAO {
         String query = "SELECT * FROM items WHERE email = '" + user.getEmail() + "'";
         Cursor cursor = banco.rawQuery(query, null);
         while (cursor.moveToNext()){
-
             Item item = new Item();
             item.setId(cursor.getInt(cursor.getColumnIndex("id")));
             item.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
-            item.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
+            item.setStatus(cursor.getInt(cursor.getColumnIndex("status")) == 1 ? true : false);
             item.setQuantidade(cursor.getInt(cursor.getColumnIndex("quantidade")));
             item.setEmail(cursor.getString(cursor.getColumnIndex("email")));
             items.add(item);
-
         }
 
         return items;
@@ -55,8 +53,12 @@ public class ItemDAO {
     public void update(Item item) {
         ContentValues values = new ContentValues();
         values.put("descricao", item.getDescricao());
-        values.put("status", item.getStatus());
+        values.put("status", item.getStatus() == true ? 1 : 0);
         values.put("quantidade", item.getQuantidade());
         banco.update("items", values, "id = ?", new String[]{Integer.toString(item.getId())});
+    }
+
+    public void remove(Item item) {
+        banco.delete("items", "id = ?", new String[]{Integer.toString(item.getId())});
     }
 }

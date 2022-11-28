@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         btEntrar = findViewById(R.id.btEntrar);
         btCadastrar = findViewById(R.id.btCadastrar);
 
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         btCadastrar.setOnClickListener(view -> {
             startActivity(new Intent(this, CadastroActivity.class));
         });
-
 
     }
 

@@ -1,5 +1,8 @@
 package com.edina.compras;
 
-public interface Callback {
+import com.edina.compras.model.Item;
 
+public interface Callback {
+    void editarItem(Item item);
+    void removerItem(Item item);
 }

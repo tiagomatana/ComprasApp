@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Conexao extends SQLiteOpenHelper {
 
-    private static final String name = "database1.db";
+    private static final String name = "bancodedados.db";
     private static final int version = 1;
 
     public Conexao(Context context){
@@ -20,7 +20,6 @@ public class Conexao extends SQLiteOpenHelper {
                 "name varchar(50) not null, password varchar(50) not null)");
         db.execSQL("create table items(id integer primary key autoincrement, email varchar(50) not null, " +
                 "descricao varchar(50) not null, quantidade int not null, status bool not null)");
-//        db.execSQL("insert into items (descricao, quantidade, status, email) values (\"livro\", 4, \"false\", \"tiago.matana@gmail.com\")");
     }
 
     @Override

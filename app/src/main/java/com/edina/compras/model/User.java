@@ -36,6 +36,11 @@ public class User implements Serializable {
     }
 
 
+    public User(){
+        this.nome = "";
+        this.email = "";
+    }
+
     private int id;
     private String nome;
     private String email;

@@ -16,13 +16,13 @@
         android:id="@+id/addDescricaoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        android:hint="Descrição"/>
+        android:hint="Descrição"
+        android:inputType="textPersonName|textCapSentences|textAutoComplete|textCapCharacters"
+        android:text="" />
 
 
     <EditText
@@ -34,17 +34,7 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="number"
-        android:text="@{item.quantidade)}"
+        android:text=""
         android:hint="Quantidade"/>
-
-    <Button
-            android:id="@+id/btAdicionar"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:text="Adicionar"
-           />
 
 </LinearLayout>

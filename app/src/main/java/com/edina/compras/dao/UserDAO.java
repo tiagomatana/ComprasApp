@@ -40,4 +40,11 @@ public class UserDAO {
 
         return logged;
     }
+
+    public long update(User user){
+        ContentValues values = new ContentValues();
+        values.put("name", user.getNome());
+        values.put("password", user.getPassword());
+        return banco.update("usuarios", values, "email = ?", new String[]{user.getEmail()});
+    }
 }

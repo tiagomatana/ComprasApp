@@ -1,15 +1,21 @@
 package com.edina.compras.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edina.compras.Callback;
 import com.edina.compras.InicioActivity;
 import com.edina.compras.R;
 import com.edina.compras.dao.ItemDAO;
@@ -22,13 +28,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private ArrayList<Item> itemsData;
     private ItemDAO itemDAO;
-    public Callable edit;
+    public AlertDialog edit;
+    Callback callback;
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        parent.getContext().getClass()
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
 
@@ -42,12 +48,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.getQuantidadeView().setText(""+ itemsData.get(position).getQuantidade());
         holder.getDescriptionView().setOnCheckedChangeListener((compoundButton, b) -> {
             itemDAO = new ItemDAO(compoundButton.getContext());
-            itemsData.get(position).setStatus(b == Boolean.TRUE ? 1 : 0);
-            itemDAO.update(itemsData.get(position));
+            Item item = itemsData.get(position);
+            item.setStatus(compoundButton.isChecked());
+            itemDAO.update(item);
         });
 
         holder.itemView.findViewById(R.id.editButton).setOnClickListener(view -> {
-//            this.edit.;
+            Item item = itemsData.get(position);
+            callback.editarItem(item);
+        });
+
+        holder.itemView.findViewById(R.id.deleteButton).setOnClickListener(view -> {
+            Item item = itemsData.get(position);
+            callback.removerItem(item);
         });
     }
 
@@ -56,8 +69,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return itemsData.size();
     }
 
-    public ItemAdapter(ArrayList<Item> items) {
+    public ItemAdapter(ArrayList<Item> items, Callback callback) {
         this.itemsData = items;
+        this.callback = callback;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +81,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             super(itemView);
             descriptionView = itemView.findViewById(R.id.itemDecription);
             quantidadeView = itemView.findViewById(R.id.qntView);
-
         }
 
         public TextView getQuantidadeView() {
