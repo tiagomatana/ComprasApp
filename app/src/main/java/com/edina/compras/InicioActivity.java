@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,19 @@ public class InicioActivity extends AppCompatActivity {
     private AlertDialog adicionarItem;
     private AlertDialog editarItem;
 
+    public void lista(User logado) {
+        recyclerView = findViewById(R.id.recyclerView);
+        itemDAO = new ItemDAO(this);
+        ArrayList<Item> items = itemDAO.load(logado);
+
+        ItemAdapter adapter = new ItemAdapter(items);
+        recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layout);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +54,7 @@ public class InicioActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
         getSupportActionBar().setTitle("Bem-vindo " + logado.getNome().toUpperCase());
-        recyclerView = findViewById(R.id.recyclerView);
-        itemDAO = new ItemDAO(this);
-        ArrayList<Item> items = itemDAO.load(logado);
-
-        ItemAdapter adapter = new ItemAdapter(items);
-        recyclerView.setAdapter(adapter);
-        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layout);
+        lista(logado);
 
         // Adicionar item
         findViewById(R.id.btAddItem).setOnClickListener(view -> {
@@ -62,6 +69,7 @@ public class InicioActivity extends AppCompatActivity {
                 item.setDescricao(descricao.getText().toString());
                 Long id = itemDAO.save(item);
                 Toast.makeText(this, "Adicionado com sucesso: ID " + id.toString(), Toast.LENGTH_SHORT).show();
+                lista(logado);
                 adicionarItem.dismiss();
             });
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -73,38 +81,37 @@ public class InicioActivity extends AppCompatActivity {
         });
 
 
-//        public void editarItem(Item item) {
-//            // Editar item
-//            findViewById(R.id.editButton).setOnClickListener(view -> {
-//                LayoutInflater li = getLayoutInflater();
-//                View v = li.inflate(R.layout.activity_gerenciar_item, null);
-//                Button editarButton = v.findViewById(R.id.btAdicionar);
-//                editarButton.setText("Alterar");
-//                EditText descricao = v.findViewById(R.id.addDescricaoText);
-//                EditText quantidade = v.findViewById(R.id.addQuantidadeText);
-//                descricao.setText(item.getDescricao());
-//                quantidade.setText(item.getQuantidade());
-//                editarButton.setOnClickListener(viewDialog -> {
-//                    item.setQuantidade(Integer.parseInt(quantidade.getText().toString()));
-//                    item.setDescricao(descricao.getText().toString());
-//
-//
-//                    itemDAO.update(item);
-//                    Toast.makeText(this, "Alterado com sucesso.", Toast.LENGTH_SHORT).show();
-//                    adicionarItem.dismiss();
-//                });
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setTitle("Adicionar Item");
-//                builder.setCancelable(Boolean.TRUE);
-//                builder.setView(v);
-//                adicionarItem = builder.create();
-//                adicionarItem.show();
-//            });
-//        }
+    }
+
+    public void editarItem(Item item) {
+        // Editar item
+
+        LayoutInflater li = getLayoutInflater();
+        View v = li.inflate(R.layout.activity_gerenciar_item, null);
+        Button editarButton = v.findViewById(R.id.btAdicionar);
+        editarButton.setText("Alterar");
+        EditText descricao = v.findViewById(R.id.addDescricaoText);
+        EditText quantidade = v.findViewById(R.id.addQuantidadeText);
+        descricao.setText(item.getDescricao());
+        quantidade.setText(item.getQuantidade());
+        editarButton.setOnClickListener(viewDialog -> {
+            item.setQuantidade(Integer.parseInt(quantidade.getText().toString()));
+            item.setDescricao(descricao.getText().toString());
 
 
+            itemDAO.update(item);
+            Toast.makeText(this, "Alterado com sucesso.", Toast.LENGTH_SHORT).show();
+            adicionarItem.dismiss();
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Adicionar Item");
+        builder.setCancelable(Boolean.TRUE);
+        builder.setView(v);
+        adicionarItem = builder.create();
+        adicionarItem.show();
 
     }
+
 
 
 

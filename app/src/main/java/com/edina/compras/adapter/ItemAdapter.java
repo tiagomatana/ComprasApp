@@ -1,32 +1,34 @@
 package com.edina.compras.adapter;
 
-import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edina.compras.InicioActivity;
 import com.edina.compras.R;
 import com.edina.compras.dao.ItemDAO;
 import com.edina.compras.model.Item;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private ArrayList<Item> itemsData;
     private ItemDAO itemDAO;
+    public Callable edit;
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        parent.getContext().getClass()
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
 
@@ -42,11 +44,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             itemDAO = new ItemDAO(compoundButton.getContext());
             itemsData.get(position).setStatus(b == Boolean.TRUE ? 1 : 0);
             itemDAO.update(itemsData.get(position));
-
         });
 
         holder.itemView.findViewById(R.id.editButton).setOnClickListener(view -> {
-
+//            this.edit.;
         });
     }
 

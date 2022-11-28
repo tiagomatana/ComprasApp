@@ -34,15 +34,15 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="number"
-        android:text=""
+        android:text="@{item.quantidade)}"
         android:hint="Quantidade"/>
 
     <Button
             android:id="@+id/btAdicionar"
-            android:layout_width="125dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="120dp"
-            android:layout_marginStart="120dp"
+            android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:text="Adicionar"
            />
