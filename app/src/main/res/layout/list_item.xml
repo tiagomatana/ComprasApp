@@ -20,15 +20,27 @@
         android:ellipsize="end"/>
 
     <TextView
-        android:id="@+id/qntView"
+        android:id="@+id/qnt"
         android:layout_width="41dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toStartOf="@+id/editButton"
+        android:text="Qtd:"
+        android:textAlignment="textEnd"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/qntView"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="45dp"
         android:layout_marginBottom="30dp"
         android:layout_toStartOf="@+id/editButton"
         android:text="0"
-        android:textAlignment="textEnd"/>
+        android:textAlignment="textEnd" />
 
     <ImageButton
         android:id="@+id/editButton"
